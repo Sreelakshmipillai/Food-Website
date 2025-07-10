@@ -8,56 +8,96 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+ <script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+
+
     <section id="Home">
         <nav>
-            <div class="logo">
-                <img src="logo.jpeg">
-            </div>
+  <div class="logo">
+    <img src="images/logo.jpeg">
+  </div>
 
-        <ul>
-            <li><a href="#Home">Home</a></li>
-            <li><a href="#About">About</a></li>
-            <li><a href="#Menu">Menu</a></li>
-            <li><a href="#Gallary">Gallary</a></li>
-            <li><a href="#Review">Review</a></li>
-            <li><a href="#Order">Order</a></li>
-         
-        </ul>
+  <ul>
+    <li><a href="#Home">Home</a></li>
+    <li><a href="#About">About</a></li>
+    <li><a href="#Menu">Menu</a></li>
+    <li><a href="#Gallary">Gallery</a></li>
+    <li><a href="#Review">Review</a></li>
+    <li><a href="#Order">Order</a></li>
+  </ul>
 
-        <div class="icon">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-heart"></i>
-            <i class="fa-solid fa-cart-shopping"></i>
-        </div>
+  <div class="nav-right">
+    <div class="icon">
+      <i class="fa-solid fa-magnifying-glass"></i>
 
-        </nav>
+      <i class="fa-solid fa-heart"></i>
+
+      <div class="cart-container">
+  <div class="cart-icon" onclick="toggleCartDropdown()">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="cart-count">0</span>
+  </div>
+
+ <div id="cart-dropdown" class="cart-dropdown">
+  <h3>Your Cart</h3>
+
+  <div class="cart-body">
+    <ul id="cart-items"></ul>
+  </div>
+
+
+  <div id="cart-footer">
+  <span id="cart-total"><strong>Total:</strong> ₹0</span>
+  <button id="clear-cart-btn">Clear Cart</button>
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+    </div>
+    <div class="user-section">
+      <span id="userGreeting">Hi, User</span>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </div>
+</nav>
+
+          
 
         <div class="main">
             <div class="main_text">
                 <h1>Get Fresh<span>Food</span><br>in a Easy way</h1>
             </div>
             <div class="main_img">
-                <img src="main_img.png">
+                <img src="images\main_img.png">
 
             </div>
-        
+    
         </div>
         <p>
             Freshness is a holistic attribute of a food product, with meaning that most often includes how recently produced or harvested a food currently is, to what extent it has been preserved, and it is the opposite of stale or spoiled.
             
         </p>
-        <div class="main_btn">
-            <a href="#">Order Now</a>
-            <i class="fa-solid fa-angle-right"></i>
-
-        </div>
 
     </section>
     <!------------------------About------------------> 
     <div class="about" id="About">
         <div class="about_main">
             <div class="image">
-                <img src="food plate.jpg">
+                <img src="images\food plate.jpg">
 
             </div>
             <div class="about_text">
@@ -70,26 +110,21 @@
 
         </div>
 
-        <div class="about_btn">
-            <a href="#">Order Now</a>
-            <i class="fa-solid fa-angle-right"></i>
-
-        </div>
-
     </div>
 
-    <!---------------------------------------------------------Menu------------------------------------------------------------>
+ <!---------------------------------------------------------Menu------------------------------------------------------------>
     <div class="menu" id="Menu">
-        <h1>Our<span> Menu</span></h1>
+        <h1 class="section-title">Our<span> Menu</span></h1>
         <div class="menu_box">
 <!-- 1 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="Iced chocolate drink.jpg">
+                    <img src="images\Iced chocolate drink.jpg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Iced Chocolate')"></i>
+
 
                 </div>
 
@@ -106,8 +141,7 @@
 
                     </div>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
-
+                    <button class="menu_btn" onclick="addToCart('Chocolate Drink', 450);">Add to Cart</button>
                 </div>
 
             </div>
@@ -115,17 +149,17 @@
             <!-- 2 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="pancake.jpeg">
+                    <img src="images\pancake.jpeg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Pancake')"></i>
 
                 </div>
 
                 <div class="menu_info">
                     <h2> Pancake</h2>
-                    <p>"Give me soft, fluffy pancakes and I can get over anything."</p>
+                    <p>"Give me soft, fluffy pancakes."</p>
                     <h3> Rs.600</h3>
                     <div class="menu_icon">
                         <i class="fa-solid fa-star"></i>
@@ -135,8 +169,7 @@
                         <i class="fa-regular fa-star-half-stroke"></i>
 
                     </div>
-
-                    <a href="#" class="menu_btn"> Order Now</a>
+                    <button class="menu_btn" onclick="addToCart('Pankcake', 600);">Add to Cart</button>
 
                 </div>
 
@@ -144,11 +177,11 @@
             <!-- 3 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="pasta.jpg">
+                    <img src="images\pasta.jpg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Pasta')"></i>
 
                 </div>
 
@@ -165,7 +198,7 @@
 
                     </div>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
+                    <button class="menu_btn" onclick="addToCart('Pasta', 420);">Add to Cart</button>
 
                 </div>
 
@@ -173,11 +206,11 @@
             <!-- 4 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="Lasagna.jpg">
+                    <img src="images\Lasagna.jpg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Lasagna')"></i>
 
                 </div>
 
@@ -194,7 +227,7 @@
 
                     </div>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
+                   <button class="menu_btn" onclick="addToCart('Lasagna', 670);">Add to Cart</button>
 
                 </div>
 
@@ -202,11 +235,11 @@
             <!-- 5 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="pizza.jpg">
-
+                <img src="images\pizza.jpg">
                 </div>
+
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Pizza')"></i>
 
                 </div>
 
@@ -222,8 +255,7 @@
                         <i class="fa-regular fa-star-half-stroke"></i>
 
                     </div>
-
-                    <a href="#" class="menu_btn"> Order Now</a>
+                    <button class="menu_btn" onclick="addToCart('Pizza', 480);">Add to Cart</button>
 
                 </div>
 
@@ -231,16 +263,16 @@
             <!-- 6 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="sandwish.jpg">
+                    <img src="images\sandwish.jpg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                   <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Sandwich')"></i>
 
                 </div>
 
                 <div class="menu_info">
-                    <h2> sandwish</h2>
+                    <h2> Sandwich</h2>
                     <p> "Happiness is making someone a well-deserved sandwich"</p>
                     <h3> Rs.330</h3>
                     <div class="menu_icon">
@@ -251,8 +283,8 @@
                         <i class="fa-regular fa-star-half-stroke"></i>
 
                     </div>
+                   <button class="menu_btn" onclick="addToCart('Sandwich', 330);">Add to Cart</button>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
 
                 </div>
 
@@ -260,11 +292,11 @@
             <!-- 7 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="spanchi.jpg">
+                    <img src="images\spanchi.jpg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Spanchi')"></i>
 
                 </div>
 
@@ -281,7 +313,7 @@
 
                     </div>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
+                    <button class="menu_btn" onclick="addToCart('Spanchi', 490);">Add to Cart</button>
 
                 </div>
 
@@ -289,11 +321,11 @@
             <!-- 8 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="ice cream.jpg">
+                    <img src="images\ice cream.jpg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Ice Cream')"></i>
 
                 </div>
 
@@ -310,7 +342,7 @@
 
                     </div>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
+                     <button class="menu_btn" onclick="addToCart('Ice cream', 500);">Add to Cart</button>
 
                 </div>
 
@@ -318,11 +350,11 @@
             <!-- 9 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="Mojito.jpg">
+                    <img src="images\Mojito.jpg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Mojito')"></i>
 
                 </div>
 
@@ -339,7 +371,7 @@
 
                     </div>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
+                     <button class="menu_btn" onclick="addToCart('Mojito', 350);">Add to Cart</button>
 
                 </div>
 
@@ -347,11 +379,11 @@
             <!-- 10 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="vegetable soup.jpeg">
+                    <img src="images\vegetable soup.jpeg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                   <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Vegetable Soup')"></i>
 
                 </div>
 
@@ -368,7 +400,9 @@
 
                     </div>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
+                    <button class="menu_btn" onclick="addToCart('Vegetable Soup', 480);">Add to Cart</button>
+
+
 
                 </div>
 
@@ -376,11 +410,11 @@
             <!-- 11 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="Turkey Braciole.jpeg">
+                    <img src="images\Turkey Braciole.jpeg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Turkey Braciole')"></i>
 
                 </div>
 
@@ -396,8 +430,8 @@
                         <i class="fa-regular fa-star-half-stroke"></i>
 
                     </div>
-
-                    <a href="#" class="menu_btn"> Order Now</a>
+                    
+                     <button class="menu_btn" onclick="addToCart('Turkry Braciole', 950);">Add to Cart</button>
 
                 </div>
 
@@ -405,16 +439,16 @@
             <!-- 12 -->
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="korean Fried Chicken.jpg">
+                    <img src="images\korean Fried Chicken.jpg">
 
                 </div>
                 <div class="small_card">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart" onclick="toggleFavorite(this, 'Korean Friend Chicken')"></i>
 
                 </div>
 
                 <div class="menu_info">
-                    <h2> Fried Chicken</h2>
+                    <h2> Korean Fried Chicken</h2>
                     <p>"My favorite meal has always been fried chicken. ..."</p>
                     <h3> Rs.750</h3>
                     <div class="menu_icon">
@@ -426,7 +460,8 @@
 
                     </div>
 
-                    <a href="#" class="menu_btn"> Order Now</a>
+                    
+                     <button class="menu_btn" onclick="addToCart('Korean Friend Chicken', 750);">Add to Cart</button>
 
                 </div>
 
@@ -440,57 +475,120 @@
 
     <!--------------------------------------------------------------- Gallery ------------------------------------------------------------>
     <div class="gallary" id="Gallary">
-        <h1>Our<span>Gallary</span></h1>
+        <h1 class="section-title">Our<span> Gallery</span></h1>
         <div class="gallary_image_box">
             <div class="gallary_image">
-                <img src="gallery 1.jpg">
-                <h3>Desserts</h3>
-                <p>
-                    "Good food, good mood"
-                </p>
-                <a href="#" class="gallary_btn">Order Now</a>
+                <img src="images/gallery 1.jpg" alt="Tiramisu Slice" />
+                <div class="price-box">
+                <p class="item-name">Tiramisu Slice</p>
+                <p class="item-price">Rs.380</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
             </div>
-            <div class="gallary_image">
-                <img src="gallery 2.jpg">
-                <h3>Desserts</h3>
-                <p>
-                    "Live, love, eat"
-                </p>
-                <a href="#" class="gallary_btn">Order Now</a>
-            </div>
-            <div class="gallary_image">
-                <img src="gallery 3.jpg">
-                <h3>Desserts</h3>
-                <p>
-                    "Let food be thy medicine and medicine be thy food"
-                </p>
-                <a href="#" class="gallary_btn">Order Now</a>
-            </div>
-            <div class="gallary_image">
-                <img src="gallery 4.jpg">
 
-                <h3>Desserts</h3>
-                <p>
-                    "Goodies for the foodies"
-                </p>
-                <a href="#" class="gallary_btn">Order Now</a>
-            </div>
-            <div class="gallary_image">
-                <img src="gallery 5.jpg">
 
-                <h3>Desserts</h3>
-                <p>
-                    "Sugar, spice, and everything nice"
-                </p>
-                <a href="#" class="gallary_btn">Order Now</a>
-            </div>
             <div class="gallary_image">
-                <img src="gallery 6.jpg">
-                <h3>Desserts</h3>
-                <p>
-                    "Age and glasses of wine should never be counted."
-                </p>
-                <a href="#" class="gallary_btn">Order Now</a>
+                <img src="images/gallery 2.jpg" alt="	Black Forest Trifle" />
+                <div class="price-box">
+                <p class="item-name">Black Forest Trifle</p>
+                <p class="item-price">Rs.290</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+
+            <div class="gallary_image">
+                <img src="images/gallery 3.jpg" alt="Fudge Brownie Cake" />
+                <div class="price-box">
+                <p class="item-name">Fudge Brownie Cake</p>
+                <p class="item-price">Rs.300</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+
+            <div class="gallary_image">
+                <img src="images/gallery 4.jpg" alt="Strawberry Shortcake" />
+                <div class="price-box">
+                <p class="item-name">Strawberry Shortcake</p>
+                <p class="item-price">Rs.260</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+
+            <div class="gallary_image">
+                <img src="images/gallery 5.jpg" alt="Berry Pancake Stack" />
+                <div class="price-box">
+                <p class="item-name">Berry Pancake Stack</p>
+                <p class="item-price">Rs.320</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+
+            <div class="gallary_image">
+                <img src="images/gallery 6.jpg" alt="Mixed Berry Layer Cake" />
+                <div class="price-box">
+                <p class="item-name">Mixed Berry Layer Cake</p>
+                <p class="item-price">Rs.340</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+             <div class="gallary_image">
+                <img src="images/gallery 7.jpg" alt="Matcha Tiramisu" />
+                <div class="price-box">
+                <p class="item-name">Matcha Tiramisu</p>
+                <p class="item-price">Rs.420</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+             <div class="gallary_image">
+                <img src="images/gallery 8.jpg" alt="	Caramel Pancake" />
+                <div class="price-box">
+                <p class="item-name">	Caramel Pancake</p>
+                <p class="item-price">Rs.230</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+            
+
+             <div class="gallary_image">
+                <img src="images/gallery 9.jpg" alt="	Chocolate Cheesecake" />
+                <div class="price-box">
+                <p class="item-name">	Chocolate Cheesecake</p>
+                <p class="item-price">Rs.290</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+             <div class="gallary_image">
+                <img src="images/gallery 10.jpg" alt="Berry French Toast" />
+                <div class="price-box">
+                <p class="item-name">Berry French Toast</p>
+                <p class="item-price">Rs.320</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+             <div class="gallary_image">
+                <img src="images/gallery 11.jpg" alt="Chocolate Ice Cream Scoop" />
+                <div class="price-box">
+                <p class="item-name">Chocolate Ice Cream</p>
+                <p class="item-price">Rs.250</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
+            </div>
+
+             <div class="gallary_image">
+                <img src="images/gallery 12.jpg" alt="	Vanilla Ice Cream Waffle" />
+                <div class="price-box">
+                <p class="item-name">	Vanilla Ice Cream Waffle</p>
+                <p class="item-price">Rs.340</p>
+                <button class="add-to-cart-btn" data-name="Choco Cake" data-price="180">Add to Cart</button>
+                </div>
             </div>
 
 
@@ -504,7 +602,7 @@
         <div class="review_box">
             <div class="review_card">
                 <div class="review_profile">
-                    <img src="review1.jpeg">
+                    <img src="images\review1.jpeg">
                 </div>
                 <div class="review_text">
                     <h2 class="name">Chloé</h2>
@@ -530,7 +628,7 @@
 
             <div class="review_card">
                 <div class="review_profile">
-                    <img src="review2.jpeg">
+                    <img src="images\review2.jpeg">
                 </div>
                 <div class="review_text">
                     <h2 class="name">Leo</h2>
@@ -548,7 +646,7 @@
                         <i class="fa-brands fa-linkedin-in"></i>
                     </div>
                     <p>
-                        “I was so impressed with my breakfast this morning! I tried the Fried Green Tomato Benedict and my boyfriend got the Crab Cakes Benedict. We both finished our whole plates and were so impressed with the quality of the food and the short amount of time it took to receive it. Our waitress was sweet and helpful. I will definitely be back!”
+                        “The Fried Green Tomato Benedict was amazing, and my boyfriend loved the Crab Cakes Benedict. Service was quick and friendly. We finished everything — definitely coming back!”
                     </p>
                 </div>
             </div>
@@ -556,7 +654,7 @@
 
             <div class="review_card">
                 <div class="review_profile">
-                    <img src="review3.jpeg">
+                    <img src="images\review3.jpeg">
                 </div>
                 <div class="review_text">
                     <h2 class="name">Louis</h2>
@@ -581,7 +679,7 @@
             <!-- 4 -->
             <div class="review_card">
                 <div class="review_profile">
-                    <img src="review4.jpeg">
+                    <img src="images\review4.jpeg">
                 </div>
                 <div class="review_text">
                     <h2 class="name">Marie</h2>
@@ -606,48 +704,48 @@
         </div>
     </div>
     <!---------------------------------------------------- Order ----------------------------------------------------------------------------------------->
-
     <div class="order" id="Order">
-        <h1><span>Order</span> Now</h1>
-        <div class="order_main">
-            <div class="order_image">
-                <img src="order_image.png">
-            </div>
-            <form action="#">
-                <div class="input">
-                    <p>Name</p>
-                    <input type="text" placeholder="you name">
-                </div>
-                <div class="input">
-                    <p>Email</p>
-                    <input type="email" placeholder="you email">
-                </div>
-                <div class="input">
-                    <p>Number</p>
-                    <input placeholder="you number">
-                </div>
-                <div class="input">
-                    <p>How Much</p>
-                    <input type="number" placeholder="how many order">
-                </div>
-                <div class="input">
-                    <p>You Order</p>
-                    <input placeholder="food name">
-                </div>
-                <div class="input">
-                    <p>Address</p>
-                    <input placeholder="you Address">
-                </div>
-                <a href="#" class="order_btn">Order Now</a>
-            </form>
-        </div>
+  <h1><span>Place</span> Your Delivery Order</h1>
+  <div class="order_main">
+    <div class="order_image">
+      <img src="images/order_image.png" alt="Delivery Illustration" />
     </div>
+
+    <form onsubmit="submitDeliveryOrder(event)">
+      <div class="input">
+        <p>Name</p>
+        <input type="text" id="deliveryName" placeholder="Your full name" required />
+      </div>
+
+      <div class="input">
+        <p>Phone Number</p>
+        <input type="tel" id="deliveryPhone" placeholder="+91 9876543210" required />
+      </div>
+
+      <div class="input" style="grid-column: span 2;">
+        <p>Delivery Address</p>
+        <textarea id="deliveryAddress" placeholder="House no, street, city..." required></textarea>
+      </div>
+
+      <div class="input" style="grid-column: span 2;">
+        <p>Additional Notes (optional)</p>
+        <textarea id="deliveryNotes" placeholder="e.g. No onions, deliver at 8 PM"></textarea>
+      </div>
+
+      <button type="submit" class="order_btn" style="grid-column: span 2;">Confirm Delivery Order</button>
+    </form>
+  </div>
+</div>
+
+
+
+
      <!------------------------------------Team---------------------------------------------->
      <div class="team">
         <h1>Our<span>Team</span></h1>
         <div class="team_box">
             <div class="profile">
-                <img src="chef1.jpg">
+                <img src="images\chef1.jpg">
                 <div class="info">
                     <h2 class="name">Alexis Soyer</h2>
                     <p class="bio">Sprinkle deliciousness on your next meal</p>
@@ -659,7 +757,7 @@
                 </div>
             </div>
             <div class="profile">
-                <img src="chef2.jpg">
+                <img src="images\chef2.jpg">
                 <div class="info">
                     <h2 class="name">Rachael</h2>
                     <p class="bio">Taste the rainbow!</p>
@@ -671,7 +769,7 @@
                 </div>
             </div>
             <div class="profile">
-                <img src="chef3.jpg">
+                <img src="images\chef3.jpg">
                 <div class="info">
                     <h2 class="name">Floyd Cardoz</h2>
                     <p class="bio">Being a professional chef is truly rewarding and beautiful</p>
@@ -683,7 +781,7 @@
                 </div>
             </div>
             <div class="profile">
-                <img src="chef4.jpg">
+                <img src="images\chef4.jpg">
                 <div class="info">
                     <h2 class="name">Garima Arora</h2>
                     <p class="bio">If cooking was easy, it wouldn't be so fun to go out and do.</p>
@@ -743,7 +841,8 @@
         <p class="end">Design by<span><i class="fa-solid fa-face-smile"></i></i>sreelakshmi pillai</span></p>
 
     </footer>
-   
+<script src="script.js"></script>
+
 </body>
 </html>
 
